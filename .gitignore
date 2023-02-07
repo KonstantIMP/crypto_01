@@ -1,0 +1,9 @@
+# Meson build directories
+builddir/
+build/
+
+# VS Code settings
+.vscode/
+
+# Meson subprojects
+/subprojects/blueprint-compiler
