@@ -1,5 +1,8 @@
 app_sources = [
-    'app.d'
+    'app.d',
+
+    'crypto/permutation.d',
+    'crypto/result.d'
 ]
 
 app_bin = executable(
