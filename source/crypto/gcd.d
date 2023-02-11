@@ -5,8 +5,8 @@ import std.traits : isIntegral;
 
 
 T gcd(T)(T a, T b) if (isIntegral!T) {
-    if (b == 0) return a;
-    return gcd(b, a % b);
+    if (a == 0) return b;
+    return gcd(b % a, a);
 }
 
 

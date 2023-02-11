@@ -5,8 +5,8 @@
 
   <object class="AdwWindow" id="window">
     <property name="title">Crypto</property>
-    <property name="default-width">850</property>
-    <property name="default-height">500</property>
+    <property name="default-width">900</property>
+    <property name="default-height">700</property>
 
     <child>
       <object class="AdwLeaflet" id="leaflet">

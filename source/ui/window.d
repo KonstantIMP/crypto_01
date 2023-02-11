@@ -4,10 +4,13 @@ import adw.Window;
 import adw.Leaflet;
 import gtk.Builder;
 import gtk.Button;
+import gtk.Stack;
 import gobject.ObjectG;
 import gobject.ParamSpec;
 import gtk.Widget;
 
+import ui.page.affinity;
+import ui.page.permutation;
 import ui.widget.color_scheme_button;
 
 
@@ -45,10 +48,10 @@ class MainWindow: Window {
 
 
     private void setupPages() {
-        import gtk.Stack, ui.page.permutation;
         Stack stack = cast(Stack)children["stack"];
 
         stack.addTitled(new PermutationCipherPage(), "permutations", "Simple permutation cipher");
+        stack.addTitled(new AffinityCipherPage(), "affinity", "Athenian cipher");
     }
 
 
