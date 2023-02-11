@@ -6,9 +6,11 @@ int main(string [] args) {
   char[char] simpleMap;
   simpleMap['a'] = 'b';
   simpleMap['b'] = 'c';
-  simpleMap['c'] = 'd';
+  simpleMap['c'] = 'a';
 
-  auto a = encrypt("abc", simpleMap);
+  writeln(isValidPermutationMap(simpleMap));
+
+  auto a = encrypt("abddc", simpleMap);
   writeln(a.msg);
 
   a = decrypt(a.msg, simpleMap);

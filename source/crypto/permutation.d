@@ -2,7 +2,9 @@ module crypto.permutation;
 
 
 import std.algorithm.searching : count;
+import std.exception : enforce;
 import std.array : appender;
+import crypto.exception;
 import crypto.result;
 
 
@@ -20,6 +22,8 @@ bool isValidPermutationMap(char[char] permutationMap) {
 
 
 Result encrypt(string msg, char[char] permutationMap) {
+    enforce!InvalidKeyException(isValidPermutationMap(permutationMap), "Invalid permutation map");
+
     auto msgBuilder = appender!string;
     auto result = Result();
 
