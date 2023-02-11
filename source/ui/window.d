@@ -47,6 +47,7 @@ class MainWindow: Window {
     private void setupPages() {
         import gtk.Stack, ui.page.permutation;
         Stack stack = cast(Stack)children["stack"];
+
         stack.addTitled(new PermutationCipherPage(), "permutations", "Simple permutation cipher");
     }
 
