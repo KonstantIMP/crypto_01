@@ -1,22 +1,25 @@
-import std.stdio;
+import adw.Application;
+import gtk.Builder;
+import r : R;
 
-import crypto.permutation;
+import ui.window;
 
 int main(string [] args) {
-  char[char] simpleMap;
-  simpleMap['a'] = 'b';
-  simpleMap['b'] = 'c';
-  simpleMap['c'] = 'a';
+  auto cryptoApp = new Application(
+    "org.kimp.crypto",
+    GApplicationFlags.FLAGS_NONE | GApplicationFlags.CAN_OVERRIDE_APP_ID
+  );
 
-  writeln(isValidPermutationMap(simpleMap));
+  cryptoApp.addOnActivate((app) {
+    auto builder = new Builder();
+    builder.addFromString(R.MAIN_WINDOW_LAYOUT, R.MAIN_WINDOW_LAYOUT.length);
 
-  auto a = encrypt("abddc", simpleMap);
-  writeln(a.msg);
+    auto mainWindow = new MainWindow(builder);
+    cryptoApp.addWindow(mainWindow);
+    mainWindow.show();
+  });
 
-  a = decrypt(a.msg, simpleMap);
-  writeln(a.msg);
-
-  return 0;
+  return cryptoApp.run(args);
 }
 
 

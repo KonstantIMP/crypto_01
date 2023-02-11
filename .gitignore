@@ -7,3 +7,6 @@ build/
 
 # Meson subprojects
 /subprojects/blueprint-compiler
+
+# Build
+crypto
