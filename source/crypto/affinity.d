@@ -43,7 +43,7 @@ Result encrypt(string msg, Key key, string alphabet = englishAlphabet) {
 }
 
 
-Result decrypt(string msg, Key key, string alphabet) {
+Result decrypt(string msg, Key key, string alphabet = englishAlphabet) {
     enforce!InvalidKeyException(
         isValidKey(key, alphabet),
         format("Invalid key %d for %d-size alphabet", key.a, alphabet.length)
@@ -55,8 +55,8 @@ Result decrypt(string msg, Key key, string alphabet) {
     foreach (size_t i, char ch; msg) {
         if (canFind(alphabet, ch)) {
             size_t y = alphabet.indexOf(ch);
-            size_t aR = reverseByMod(key.a, alphabet.length);
-            msgBuilder.put(alphabet[((y - key.b) * aR) % alphabet.length]);
+            long aR = reverseByMod(cast(long)key.a, cast(long)alphabet.length);
+            msgBuilder.put(alphabet[((y - key.b + alphabet.length) * aR) % alphabet.length]);
         } else {
             result.skipped ~= [i];
             msgBuilder.put(ch);

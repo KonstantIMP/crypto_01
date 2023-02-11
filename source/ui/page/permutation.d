@@ -5,9 +5,27 @@ import adw.PreferencesPage;
 import ui.widget.crypt_group;
 import ui.widget.permutation_group;
 
-class PermutationCipherPage : PreferencesPage {
+import cipher = crypto.permutation;
+import crypto.result;
+
+import cryptor;
+
+class PermutationCipherPage : PreferencesPage, Cryptor {
+    private CryptGroup cGroup;
+    private PermutationsGroup pGroup;
+
     public this() {
-        add(new CryptGroup());
-        add(new PermutationsGroup());
+        cGroup = new CryptGroup(this);
+        pGroup = new PermutationsGroup();
+
+        add(cGroup); add(pGroup);
+    }
+
+    Result encrypt(string src) {
+        return cipher.encrypt(src, pGroup.key());
+    }
+
+    Result decrypt(string src) {
+        return cipher.decrypt(src, pGroup.key());
     }
 }

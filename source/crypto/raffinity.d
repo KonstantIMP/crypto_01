@@ -74,7 +74,7 @@ Result decrypt(string msg, Key a, Key b, string alphabet = englishAlphabet) {
         if (canFind(alphabet, ch)) {
             size_t y = alphabet.indexOf(ch);
             auto key = keys[i];
-            size_t aR = reverseByMod(key.a, alphabet.length);
+            long aR = reverseByMod(cast(long)key.a, cast(long)alphabet.length);
             msgBuilder.put(alphabet[((y - key.b) * aR) % alphabet.length]);
         } else {
             result.skipped ~= [i];

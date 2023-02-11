@@ -14,6 +14,7 @@ import gdkpixbuf.Pixbuf;
 import std.format;
 
 import crypto.alphabet;
+import crypto.key;
 
 class KeyGroup: PreferencesGroup {
     private PreferencesRow contentRow;
@@ -22,6 +23,8 @@ class KeyGroup: PreferencesGroup {
     private Label errorMsg;
 
     private string alphabet;
+
+    @property Key key() { return Key(cast(ulong)alpha.getValue(), cast(ulong)betta.getValue()); }
     
     public this(string alphabet = englishAlphabet) {
         setTitle("Key pair settings");

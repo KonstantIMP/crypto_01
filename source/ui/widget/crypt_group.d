@@ -16,6 +16,10 @@ import sourceview.StyleSchemeManager;
 import sourceview.LanguageManager;
 import sourceview.View;
 
+import std.uni : toLower;
+
+import crypto.result;
+import cryptor;
 
 class CryptGroup : PreferencesGroup {
     private PreferencesRow textInputRow;
@@ -27,7 +31,9 @@ class CryptGroup : PreferencesGroup {
     private Buffer buffer;
     private View textView;
 
-    public this() {
+    private Cryptor cryptor;
+
+    public this(Cryptor cryptor = null) {
         setTitle("Encryption and Decryption");
         setDescription("Use this block to encrypt and decrypt text");
         
@@ -70,6 +76,23 @@ class CryptGroup : PreferencesGroup {
         textInputRow.setChild(content);
         applyStyleForEditor();
         add(textInputRow);
+
+        this.cryptor = cryptor;
+        connectSignals();
+    }
+
+    private void connectSignals() {       
+        encrypt.addOnClicked((btn) { 
+            if (cryptor !is null) {
+                setResult(cryptor.encrypt(buffer.getText().toLower()));
+            }
+        });
+        
+        decrypt.addOnClicked((btn) {
+            if (cryptor !is null) {
+                setResult(cryptor.decrypt(buffer.getText().toLower()));
+            }
+        });
     }
 
     private void applyStyleForEditor() {
@@ -100,5 +123,9 @@ class CryptGroup : PreferencesGroup {
                 StyleSchemeManager.getDefault().getScheme("Adwaita" ~ (styleManager.getDark() ? "-dark" : ""))
             );
         }, "dark");
+    }
+
+    private void setResult(Result res) {
+        buffer.setText(res.msg);
     }
 }

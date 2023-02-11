@@ -22,6 +22,8 @@ class PermutationsGroup: PreferencesGroup {
 
     private PreferencesRow contentRow;
 
+    @property char[char] key() { return permutation; }
+
     public this(string alphabet = englishAlphabet) {
         setTitle("Key settings");
         setDescription("Set up a permutation for the simple replacement cipher");
