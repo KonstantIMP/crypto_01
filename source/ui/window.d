@@ -11,6 +11,7 @@ import gtk.Widget;
 
 import ui.page.affinity;
 import ui.page.permutation;
+import ui.page.raffinity;
 import ui.widget.color_scheme_button;
 
 
@@ -52,6 +53,7 @@ class MainWindow: Window {
 
         stack.addTitled(new PermutationCipherPage(), "permutations", "Simple permutation cipher");
         stack.addTitled(new AffinityCipherPage(), "affinity", "Athenian cipher");
+        stack.addTitled(new RAffinityCipherPage(), "raffinity", "Recurrent Athenian cipher");
     }
 
 
