@@ -1,28 +1,31 @@
 {
-    "name": "crypto",
-    "authors": [
-        "KonstantIMP"
-    ],
-    "description": "Simple ciphers",
-    "copyright": "Copyright © 2023, KonstantIMP",
-    "license": "LGPLv3",
-    "targetType": "executable",
-    "dependencies": {
-        "gtk_d:linker": "1.0.3",
-        "gtk_d:glib": "1.0.3",
-        "gtk_d:graphene": "1.0.3",
-        "gtk_d:cairo": "1.0.3",
-        "gtk_d:harfbuzz": "1.0.3",
-        "gtk_d:pango": "1.0.3",
-        "gtk_d:gio": "1.0.3",
-        "gtk_d:gdkpixbuf": "1.0.3",
-        "gtk_d:atk": "1.0.3",
-        "gtk_d:gdk": "1.0.3",
-        "gtk_d:rsvg": "1.0.3",
-        "gtk_d:gsk": "1.0.3",
-        "gtk_d:gtk": "1.0.3",
-        "gtk_d:adw": "1.0.3",
-        "gtk_d:sourceview": "1.0.3"
-    },
-    "dflags": ["-J=resource"]
+	"authors": [
+		"KonstantIMP"
+	],
+	"copyright": "Copyright © 2023, KonstantIMP",
+	"dependencies": {
+		"gtk_d:adw": "1.0.3",
+		"gtk_d:atk": "1.0.3",
+		"gtk_d:cairo": "1.0.3",
+		"gtk_d:gdk": "1.0.3",
+		"gtk_d:gdkpixbuf": "1.0.3",
+		"gtk_d:gio": "1.0.3",
+		"gtk_d:glib": "1.0.3",
+		"gtk_d:graphene": "1.0.3",
+		"gtk_d:gsk": "1.0.3",
+		"gtk_d:gtk": "1.0.3",
+		"gtk_d:harfbuzz": "1.0.3",
+		"gtk_d:linker": "1.0.3",
+		"gtk_d:pango": "1.0.3",
+		"gtk_d:rsvg": "1.0.3",
+		"gtk_d:sourceview": "1.0.3",
+		"optional": "~>1.3.0"
+	},
+	"description": "Simple ciphers",
+	"dflags": [
+		"-J=resource"
+	],
+	"license": "LGPLv3",
+	"name": "crypto",
+	"targetType": "executable"
 }

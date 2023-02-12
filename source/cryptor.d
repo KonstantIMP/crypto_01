@@ -1,9 +1,10 @@
 module cryptor;
 
 import crypto.result;
+import optional;
 
 interface Cryptor {
-    Result encrypt(string);
-    Result decrypt(string);
+    Optional!Result encrypt(string);
+    Optional!Result decrypt(string);
 }
 

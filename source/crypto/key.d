@@ -2,7 +2,7 @@ module crypto.key;
 
 
 struct Key {
-    ulong a;
-    ulong b;
+    long a;
+    long b;
 }
 

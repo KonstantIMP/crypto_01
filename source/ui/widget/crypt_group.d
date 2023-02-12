@@ -10,6 +10,7 @@ import gtk.Box;
 import gtk.Button;
 import gtk.Grid;
 import gtk.ScrolledWindow;
+import gtk.Window;
 
 import sourceview.Buffer;
 import sourceview.StyleSchemeManager;
@@ -81,18 +82,48 @@ class CryptGroup : PreferencesGroup {
         connectSignals();
     }
 
-    private void connectSignals() {       
+    private void connectSignals() {   
+        import optional;
+
         encrypt.addOnClicked((btn) { 
             if (cryptor !is null) {
-                setResult(cryptor.encrypt(buffer.getText().toLower()));
+                cryptor.encrypt(buffer.getText().toLower()).match!(
+                    (Result res) { setResult(res); },
+                    () { cryptErrorMsg(); },
+                );
             }
         });
         
         decrypt.addOnClicked((btn) {
             if (cryptor !is null) {
-                setResult(cryptor.decrypt(buffer.getText().toLower()));
+                cryptor.decrypt(buffer.getText().toLower()).match!(
+                    (Result res) { setResult(res); },
+                    () { cryptErrorMsg(); },
+                );
             }
         });
+    }
+
+    private void cryptErrorMsg() {        
+        import gtk.MessageDialog;
+
+        auto md = new MessageDialog(
+            getToplevel(),
+            GtkDialogFlags.MODAL,
+            GtkMessageType.ERROR,
+            GtkButtonsType.OK,
+            "Invalid options"
+        );
+        md.addOnResponse( (res, d) { d.close(); } );
+        md.show();
+    }
+
+    private Window getToplevel() {
+        auto widget = getParent();
+        while (widget.getParent() !is null) {
+            widget = widget.getParent();
+        }
+        return cast(Window)widget;
     }
 
     private void applyStyleForEditor() {

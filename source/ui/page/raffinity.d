@@ -10,6 +10,7 @@ import cipher = crypto.raffinity;
 import crypto.alphabet;
 import crypto.result;
 
+import optional;
 import cryptor;
 
 class RAffinityCipherPage : PreferencesPage, Cryptor {
@@ -24,11 +25,17 @@ class RAffinityCipherPage : PreferencesPage, Cryptor {
         add(cGroup); add(k1); add(k2);
     }
 
-    Result encrypt(string src) {
-        return cipher.encrypt(src, k1.key(), k2.key());
+    Optional!Result encrypt(string src) {
+        if (!isValidKey(k1.key(), englishAlphabet) || !isValidKey(k2.key(), englishAlphabet)) {
+            return no!Result;
+        }
+        return some(cipher.encrypt(src, k1.key(), k2.key()));
     }
 
-    Result decrypt(string src) {
-        return cipher.decrypt(src, k1.key(), k2.key());
+    Optional!Result decrypt(string src) {
+        if (!isValidKey(k1.key(), englishAlphabet) || !isValidKey(k2.key(), englishAlphabet)) {
+            return no!Result;
+        }
+        return some(cipher.decrypt(src, k1.key(), k2.key()));
     }
 }

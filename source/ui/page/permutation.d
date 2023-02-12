@@ -8,6 +8,7 @@ import ui.widget.permutation_group;
 import cipher = crypto.permutation;
 import crypto.result;
 
+import optional;
 import cryptor;
 
 class PermutationCipherPage : PreferencesPage, Cryptor {
@@ -21,11 +22,13 @@ class PermutationCipherPage : PreferencesPage, Cryptor {
         add(cGroup); add(pGroup);
     }
 
-    Result encrypt(string src) {
-        return cipher.encrypt(src, pGroup.key());
+    Optional!Result encrypt(string src) {
+        if (!cipher.isValidPermutationMap(pGroup.key())) return no!Result;
+        return some(cipher.encrypt(src, pGroup.key()));
     }
 
-    Result decrypt(string src) {
-        return cipher.decrypt(src, pGroup.key());
+    Optional!Result decrypt(string src) {
+        if (!cipher.isValidPermutationMap(pGroup.key())) return no!Result;
+        return some(cipher.decrypt(src, pGroup.key()));
     }
 }
