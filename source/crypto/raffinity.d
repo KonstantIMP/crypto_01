@@ -16,14 +16,14 @@ import crypto.gcd;
 import crypto.key;
 
 
-Key [] generateKeys(Key a, Key b, size_t len) {
+Key [] generateKeys(Key a, Key b, size_t len, size_t alphabetLen) {
     Key [] result = new Key[max(2, len)];
     result[0] = a; result[1] = b;
 
     for (size_t i = 2; i < len; i++) {
         result[i] = Key(
-            result[i - 1].a * result[i - 2].a,
-            result[i - 1].b + result[i - 1].b
+            (result[i - 1].a * result[i - 2].a) % alphabetLen,
+            (result[i - 1].b + result[i - 2].b) % alphabetLen
         );
     }
     return result;
@@ -38,7 +38,7 @@ Result encrypt(string msg, Key a, Key b, string alphabet = englishAlphabet) {
         )
     );
 
-    auto keys = generateKeys(a, b, msg.length);
+    auto keys = generateKeys(a, b, msg.length, alphabet.length);
     auto msgBuilder = appender!string;
     auto result = Result();
 
@@ -52,7 +52,6 @@ Result encrypt(string msg, Key a, Key b, string alphabet = englishAlphabet) {
             msgBuilder.put(ch);
         }
     }
-
     result.msg = msgBuilder[];
     return result;
 }
@@ -66,7 +65,7 @@ Result decrypt(string msg, Key a, Key b, string alphabet = englishAlphabet) {
         )
     );
 
-    auto keys = generateKeys(a, b, msg.length);
+    auto keys = generateKeys(a, b, msg.length, alphabet.length);
     auto msgBuilder = appender!string;
     auto result = Result();
 
