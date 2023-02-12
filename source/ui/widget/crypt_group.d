@@ -34,6 +34,8 @@ class CryptGroup : PreferencesGroup {
 
     private Cryptor cryptor;
 
+    @property string text() { return buffer.getText(); }
+
     public this(Cryptor cryptor = null) {
         setTitle("Encryption and Decryption");
         setDescription("Use this block to encrypt and decrypt text");
@@ -137,7 +139,7 @@ class CryptGroup : PreferencesGroup {
         );
     }
 
-    private Button buildButtonWithContent(string label, string iconName) {
+    public static Button buildButtonWithContent(string label, string iconName) {
         auto content = new ButtonContent();
         content.setLabel(label);
         content.setIconName(iconName);
