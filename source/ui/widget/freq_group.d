@@ -8,7 +8,7 @@ import gtk.Box;
 import gtk.Button;
 import gtk.Grid;
 import gtk.Label;
-import gtk.LevelBar;
+import gtk.ProgressBar;
 
 import std.algorithm.searching : canFind;
 
@@ -19,7 +19,7 @@ import textprovider;
 class FrequencyGroup: PreferencesGroup {
     private string alphabet;
 
-    private LevelBar[char] bars;
+    private ProgressBar[char] bars;
     
     private PreferencesRow contentRow;
     private Button generate, clear;
@@ -62,7 +62,7 @@ class FrequencyGroup: PreferencesGroup {
             );
 
             foreach (k; data.byKeyValue) {
-                bars[k.key].setValue(
+                bars[k.key].setFraction(
                     (cast(double)k.value) / (cast(double)total)
                 );
             }
@@ -71,12 +71,11 @@ class FrequencyGroup: PreferencesGroup {
 
     private void initBars() {
         foreach (char ch; alphabet) {
-            LevelBar bar = new LevelBar();
+            ProgressBar bar = new ProgressBar();
+            //bar.setShowText(true); // Invalid orientation
             bar.setOrientation(GtkOrientation.VERTICAL);
             bar.setHexpand(false);
             bar.setVexpand(true);
-            bar.setMinValue(0.0);
-            bar.setMaxValue(1.0);
             bar.setInverted(true);
             bars[ch] = bar;
         }
@@ -85,7 +84,7 @@ class FrequencyGroup: PreferencesGroup {
 
     private void clearBars() {
         foreach (char ch; alphabet) {
-            bars[ch].setValue(0.0);
+            bars[ch].setFraction(0.0);
         }
     }
 

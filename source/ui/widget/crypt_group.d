@@ -34,7 +34,7 @@ class CryptGroup : PreferencesGroup {
 
     private Cryptor cryptor;
 
-    @property string text() { return buffer.getText(); }
+    @property string text() { return buffer.getText().toLower(); }
 
     public this(Cryptor cryptor = null) {
         setTitle("Encryption and Decryption");
